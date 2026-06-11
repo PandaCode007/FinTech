@@ -1,0 +1,369 @@
+CRITICAL - 2026-06-07 18:06:18 --> The framework needs the following extension(s) installed and loaded: curl.
+in SYSTEMPATH\CodeIgniter.php on line 219.
+ 1 SYSTEMPATH\CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension()
+ 2 SYSTEMPATH\CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+ 3 FCPATH\index.php(59): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2026-06-07 19:14:41 --> ini_set(): session.sid_length INI setting is deprecated
+in SYSTEMPATH\Session\Session.php on line 357.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH\Session\Session.php(357): ini_set()
+ 3 SYSTEMPATH\Session\Session.php(327): CodeIgniter\Session\Session->configureSidLength()
+ 4 SYSTEMPATH\Session\Session.php(232): CodeIgniter\Session\Session->configure()
+ 5 SYSTEMPATH\Config\Services.php(665): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(253): CodeIgniter\Config\Services::session()
+ 7 SYSTEMPATH\Config\BaseService.php(194): CodeIgniter\Config\BaseService::__callStatic()
+ 8 SYSTEMPATH\Config\Services.php(637): CodeIgniter\Config\BaseService::getSharedInstance()
+ 9 SYSTEMPATH\Config\BaseService.php(253): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Common.php(939): CodeIgniter\Config\BaseService::__callStatic()
+11 APPPATH\Views\template\bank-pro\header.php(616): session()
+12 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\template\\bank-pro\\header.php')
+13 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():210}()
+14 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+15 APPPATH\Controllers\Home.php(39): view()
+16 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Home->index()
+17 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+18 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+19 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:19:53 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:51:16 --> Undefined array key "message"
+in APPPATH\Views\template\bank-pro\home.php on line 177.
+ 1 APPPATH\Views\template\bank-pro\home.php(177): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\template\\bank-pro\\home.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():210}()
+ 4 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 5 APPPATH\Controllers\Home.php(40): view()
+ 6 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:51:22 --> Undefined array key "message"
+in APPPATH\Views\template\bank-pro\home.php on line 177.
+ 1 APPPATH\Views\template\bank-pro\home.php(177): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\template\\bank-pro\\home.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():210}()
+ 4 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 5 APPPATH\Controllers\Home.php(40): view()
+ 6 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:51:23 --> Undefined array key "message"
+in APPPATH\Views\template\bank-pro\home.php on line 177.
+ 1 APPPATH\Views\template\bank-pro\home.php(177): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\template\\bank-pro\\home.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():210}()
+ 4 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 5 APPPATH\Controllers\Home.php(40): view()
+ 6 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:51:39 --> Undefined array key "message"
+in APPPATH\Views\template\bank-pro\home.php on line 177.
+ 1 APPPATH\Views\template\bank-pro\home.php(177): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\template\\bank-pro\\home.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():210}()
+ 4 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 5 APPPATH\Controllers\Home.php(40): view()
+ 6 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 19:52:42 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:11:17 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:11:17 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 20:11:50 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:11:50 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 20:12:02 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:12:02 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 20:55:58 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:55:58 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 20:56:16 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 20:56:16 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 21:00:05 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:00:05 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 21:01:04 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:01:28 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:01:29 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:01:29 --> Uncaught CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed. in C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php:715
+Stack trace:
+#0 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(715): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(705): CodeIgniter\HTTP\Response->dispatchCookies()
+#2 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\HTTP\ResponseTrait.php(445): CodeIgniter\HTTP\Response->sendCookies()
+#3 C:\Users\stevetechsolutions\Downloads\RCB-BANK-main\system\Debug\Exceptions.php(132): CodeIgniter\HTTP\Response->send()
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#5 {main}
+  thrown
+in SYSTEMPATH\HTTP\ResponseTrait.php on line 715.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 21:10:27 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:10:29 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:10:37 --> Invalid file: template/bank-pro/.well-known
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH\Common.php(1142): CodeIgniter\View\View->render()
+ 3 APPPATH\Controllers\Pages.php(40): view()
+ 4 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Pages->view()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:10:38 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(54): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:10:48 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(94): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:10:57 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:12:02 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(54): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:12:23 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(54): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2026-06-07 21:12:30 --> Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+in APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php on line 15.
+ 1 APPPATH\ThirdParty\codeigniter4-datatables\src\Helper.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(241): Hermawan\DataTables\Helper::getObjectPropertyValue()
+ 3 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTableColumnDefs.php(17): Hermawan\DataTables\DataTableColumnDefs->initFromBuilder()
+ 4 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(35): Hermawan\DataTables\DataTableColumnDefs->__construct()
+ 5 APPPATH\ThirdParty\codeigniter4-datatables\src\DataTable.php(46): Hermawan\DataTables\DataTable->__construct()
+ 6 APPPATH\Controllers\Tables.php(25): Hermawan\DataTables\DataTable::of()
+ 7 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Tables->index()
+ 8 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH\index.php(71): CodeIgniter\CodeIgniter->run()

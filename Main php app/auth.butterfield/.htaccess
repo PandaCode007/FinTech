@@ -1,0 +1,40 @@
+# ==============================
+# 🔧 Clean URLs Configuration
+# ==============================
+
+RewriteEngine On
+
+# ------------------------------
+# 1️⃣ Allow direct access to real files/folders
+# ------------------------------
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ------------------------------
+# 2️⃣ Clean URLs: remove .php or .html extensions
+# Example:
+#   /about  → /about.php
+#   /contact → /contact.html
+#   /api/get-config → /api/get-config.php
+# ------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ------------------------------
+# 3️⃣ Ensure /api folder still accessible
+# (Bypass any rewrites that would block it)
+# ------------------------------
+RewriteRule ^api/ - [L]
+
+# ------------------------------
+# 4️⃣ Optional: force lowercase URLs (comment out if not needed)
+# ------------------------------
+# RewriteMap lowercase int:tolower
+# RewriteCond %{REQUEST_URI} [A-Z]
+# RewriteRule (.*) ${lowercase:$1} [R=301,L]

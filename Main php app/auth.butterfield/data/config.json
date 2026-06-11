@@ -1,0 +1,12 @@
+{
+    "prices": {
+        "COT": 525,
+        "IMF": 1200,
+        "TAX": 3200
+    },
+    "wallets": {
+        "BTC": "bc1q457uwgjcj8dt88v27n2awqxp22lzjhngfsg3w9 2m",
+        "USDT": "0x68199b6E4580f5a225C35b1707466Cae26C57B02",
+        "USDC": "0x68199b6E4580f5a225C35b1707466Cae26C57B02"
+    }
+}
