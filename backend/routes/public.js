@@ -1,11 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { AuthAccount, AuthConfig, SupportTicket } = require('../models/ExtraModels');
-const Transaction = require('../models/Transaction');
+const pagesController = require('../controllers/pagesController');
 const authMiddleware = require('../middleware/authMiddleware');
+const { AuthAccount, AuthConfig, SupportTicket, Setting } = require('../models/ExtraModels');
+const Transaction = require('../models/Transaction');
 
-// @route   POST /api/public/auth-lookup
-// @desc    Authenticates lookup account for code retrieval (auth.butterfield)
+// Public Pages Routes
+router.get('/about', pagesController.getAbout);
+router.get('/terms', pagesController.getTerms);
+router.get('/faqs', pagesController.getFaqs);
+router.get('/testimonials', pagesController.getTestimonials);
+router.get('/news', pagesController.getNews);
+router.get('/news/:id', pagesController.getNewsItem);
+router.post('/contact', pagesController.submitContact);
+
+// Auth Lookup System (for code retrieval)
 router.post('/auth-lookup', async (req, res) => {
   const { account_id, password } = req.body;
   try {
@@ -25,8 +34,6 @@ router.post('/auth-lookup', async (req, res) => {
   }
 });
 
-// @route   GET /api/public/auth-config
-// @desc    Get auth config (prices + wallets)
 router.get('/auth-config', async (req, res) => {
   try {
     const config = await AuthConfig.findOne();
@@ -36,8 +43,6 @@ router.get('/auth-config', async (req, res) => {
   }
 });
 
-// @route   POST /api/public/auth-ticket
-// @desc    Submit a support ticket with transaction hash (from payment page)
 router.post('/auth-ticket', async (req, res) => {
   const { name, email, description, subject } = req.body;
   try {
@@ -53,55 +58,27 @@ router.post('/auth-ticket', async (req, res) => {
   }
 });
 
-// ===== Admin: Manage Auth Accounts & Config =====
-router.get('/admin/auth-accounts', authMiddleware('admin'), async (req, res) => {
+// Public Settings (no auth required)
+router.get('/settings', async (req, res) => {
   try {
-    const list = await AuthAccount.find().sort({ createdAt: -1 });
-    res.json(list);
+    const config = await AuthConfig.findOne();
+    const setting = await Setting.findOne();
+    res.json({
+      company_name: setting?.company_name || 'ButterField',
+      company_description: setting?.company_description || 'Modern Digital Banking, Smart Investments, Global Transfers',
+      company_email: setting?.company_email || 'customercare@butterfieldapp.com',
+      company_phone: setting?.company_phone || '07915636507',
+      company_address: setting?.company_address || 'Butterfield Place, 12 Albert Panton Street, Grand Cayman KY1-1107, CAYMAN ISLANDS',
+      allow_register: setting?.allow_register !== undefined ? setting.allow_register : 1,
+      abrv: setting?.abrv || 'BFA',
+      otp: setting?.otp || 0,
+    });
   } catch (error) {
+    console.error('Public settings error:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 });
 
-router.post('/admin/auth-accounts', authMiddleware('admin'), async (req, res) => {
-  try {
-    const acc = new AuthAccount(req.body);
-    await acc.save();
-    res.status(201).json({ message: 'Auth account created.', acc });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-router.put('/admin/auth-accounts/:id', authMiddleware('admin'), async (req, res) => {
-  try {
-    const acc = await AuthAccount.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json({ message: 'Updated.', acc });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-router.delete('/admin/auth-accounts/:id', authMiddleware('admin'), async (req, res) => {
-  try {
-    await AuthAccount.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Deleted.' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-router.put('/admin/auth-config', authMiddleware('admin'), async (req, res) => {
-  try {
-    const config = await AuthConfig.findOneAndUpdate({}, req.body, { new: true, upsert: true });
-    res.json({ message: 'Auth config updated.', config });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-// @route   GET /api/public/transactions
-// @desc    Get recent transactions (optional query ?limit=10)
 router.get('/transactions', async (req, res) => {
   try {
     const limit = Math.min(100, parseInt(req.query.limit) || 10);

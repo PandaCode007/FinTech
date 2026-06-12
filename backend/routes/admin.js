@@ -1,183 +1,79 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const Transfer = require('../models/Transfer');
-const TempTransfer = require('../models/TempTransfer');
-const { SupportTicket, Notification, Beneficiary, CheckDeposit, Setting, PaymentGateway, News, Testimonial, FAQ, BasicContent, EmailTemplate } = require('../models/ExtraModels');
+const multer = require('multer');
+const path = require('path');
 const authMiddleware = require('../middleware/authMiddleware');
+const adminController = require('../controllers/adminController');
 
-// @route   GET /api/admin/stats
-// @desc    Get Admin Panel dashboard statistics
-router.get('/stats', authMiddleware('admin'), async (req, res) => {
-  try {
-    const totalUsers = await User.countDocuments();
-    const totalTickets = await SupportTicket.countDocuments();
-    const pendingChecks = await CheckDeposit.countDocuments();
-    const pendingTickets = await SupportTicket.countDocuments({ status: 0 });
-
-    const userBalances = await User.aggregate([
-      { $group: { _id: null, totalSavings: { $sum: '$savings_balance' }, totalChecking: { $sum: '$check_balance' } } }
-    ]);
-
-    const totalSavings = userBalances.length > 0 ? userBalances[0].totalSavings : 0;
-    const totalChecking = userBalances.length > 0 ? userBalances[0].totalChecking : 0;
-
-    res.json({
-      totalUsers,
-      totalTickets,
-      pendingChecks,
-      pendingTickets,
-      totalSavings,
-      totalChecking
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
+// Multer for image uploads (testimonials)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, path.join(__dirname, '../../uploads')),
+  filename: (req, file, cb) => cb(null, Date.now() + '_' + file.originalname.replace(/\s+/g, '_'))
 });
+const upload = multer({ storage });
 
-// @route   GET /api/admin/users
-// @desc    Get all users list
-router.get('/users', authMiddleware('admin'), async (req, res) => {
-  try {
-    const users = await User.find().sort({ createdAt: -1 });
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Dashboard Stats
+router.get('/stats', authMiddleware('admin'), adminController.getStats);
 
-// @route   PUT /api/admin/user/:id
-// @desc    Update user details (including balances, custom codes, status, etc.)
-router.put('/user/:id', authMiddleware('admin'), async (req, res) => {
-  try {
-    const updateData = req.body;
-    const user = await User.findByIdAndUpdate(req.params.id, updateData, { new: true });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json({ message: 'User updated successfully.', user });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// User Management
+router.get('/users', authMiddleware('admin'), adminController.getUsers);
+router.get('/user/:id', authMiddleware('admin'), adminController.getUser);
+router.put('/user/:id', authMiddleware('admin'), adminController.updateUser);
+router.delete('/user/:id', authMiddleware('admin'), adminController.deleteUser);
 
-// @route   DELETE /api/admin/user/:id
-// @desc    Delete user
-router.delete('/user/:id', authMiddleware('admin'), async (req, res) => {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    // Also delete their transfers
-    await Transfer.deleteMany({ user_id: req.params.id });
-    res.json({ message: 'User and all associated transfers deleted.' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Transfers
+router.get('/transfers', authMiddleware('admin'), adminController.getTransfers);
+router.post('/transfer', authMiddleware('admin'), adminController.createTransfer);
+router.put('/transfer/:id', authMiddleware('admin'), adminController.updateTransfer);
+router.delete('/transfer/:id', authMiddleware('admin'), adminController.deleteTransfer);
 
-// @route   GET /api/admin/transfers
-// @desc    Get all transfer logs
-router.get('/transfers', authMiddleware('admin'), async (req, res) => {
-  try {
-    const list = await Transfer.find().populate('user_id', 'name email').sort({ createdAt: -1 });
-    res.json(list);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Support Tickets
+router.get('/tickets', authMiddleware('admin'), adminController.getTickets);
+router.put('/ticket/:id', authMiddleware('admin'), adminController.updateTicketStatus);
+router.delete('/ticket/:id', authMiddleware('admin'), adminController.deleteTicket);
 
-// @route   POST /api/admin/transfer
-// @desc    Create manual transfer log (Credit/Debit) for users
-router.post('/transfer', authMiddleware('admin'), async (req, res) => {
-  try {
-    const { user_id, amount, bank_name, sender_acc, receiver_name, receiver_acc, type, remarks, status } = req.body;
-    const user = await User.findById(user_id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
+// System Settings
+router.get('/settings', authMiddleware('admin'), adminController.getSettings);
+router.put('/settings', authMiddleware('admin'), adminController.updateSettings);
 
-    const reference = Math.floor(100000 + Math.random() * 900000).toString();
-    const txMonth = new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' });
+// Content Management: FAQs
+router.get('/faqs', authMiddleware('admin'), adminController.getFAQs);
+router.post('/faqs', authMiddleware('admin'), adminController.createFAQ);
+router.put('/faqs/:id', authMiddleware('admin'), adminController.updateFAQ);
+router.delete('/faqs/:id', authMiddleware('admin'), adminController.deleteFAQ);
 
-    // Update user balance if status is Successful
-    if (status === 'Successful') {
-      const balanceField = sender_acc === user.savings_acc ? 'savings_balance' : 'check_balance';
-      if (type === 'Debit') {
-        user[balanceField] -= Number(amount);
-      } else {
-        user[balanceField] += Number(amount);
-      }
-      await user.save();
-    }
+// Content Management: Testimonials
+router.get('/testimonials', authMiddleware('admin'), adminController.getTestimonials);
+router.post('/testimonials', authMiddleware('admin'), upload.single('image'), adminController.createTestimonial);
+router.put('/testimonials/:id', authMiddleware('admin'), upload.single('image'), adminController.updateTestimonial);
+router.delete('/testimonials/:id', authMiddleware('admin'), adminController.deleteTestimonial);
 
-    const tx = new Transfer({
-      user_id: user._id,
-      amount,
-      bank_name,
-      sender_id: user.account_id,
-      sender_acc,
-      reference,
-      receiver_name,
-      receiver_acc,
-      type,
-      remarks,
-      status,
-      balance: sender_acc === user.savings_acc ? user.savings_balance : user.check_balance,
-      month: txMonth
-    });
+// Content Management: News
+router.get('/news', authMiddleware('admin'), adminController.getNews);
+router.post('/news', authMiddleware('admin'), adminController.createNews);
+router.put('/news/:id', authMiddleware('admin'), adminController.updateNews);
+router.delete('/news/:id', authMiddleware('admin'), adminController.deleteNews);
 
-    await tx.save();
-    res.status(201).json({ message: 'Transfer logged successfully.', tx });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Content Management: Basic Content (About, Terms)
+router.get('/content/:title', authMiddleware('admin'), adminController.getBasicContent);
+router.put('/content/:title', authMiddleware('admin'), adminController.updateBasicContent);
 
-// @route   GET /api/admin/tickets
-// @desc    Get all support tickets
-router.get('/tickets', authMiddleware('admin'), async (req, res) => {
-  try {
-    const list = await SupportTicket.find().populate('user_id', 'name email').sort({ createdAt: -1 });
-    res.json(list);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Email Templates
+router.get('/email-templates', authMiddleware('admin'), adminController.getEmailTemplates);
+router.put('/email-templates/:id', authMiddleware('admin'), adminController.updateEmailTemplate);
 
-// @route   PUT /api/admin/ticket/:id
-// @desc    Update support ticket status
-router.put('/ticket/:id', authMiddleware('admin'), async (req, res) => {
-  try {
-    const { status } = req.body;
-    const ticket = await SupportTicket.findByIdAndUpdate(req.params.id, { status }, { new: true });
-    res.json({ message: 'Ticket status updated.', ticket });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Payment Gateways
+router.get('/payment-gateways', authMiddleware('admin'), adminController.getPaymentGateways);
+router.put('/payment-gateways/:id', authMiddleware('admin'), adminController.updatePaymentGateway);
 
-// @route   GET /api/admin/settings
-// @desc    Get system settings
-router.get('/settings', authMiddleware('admin'), async (req, res) => {
-  try {
-    let setting = await Setting.findOne();
-    if (!setting) {
-      setting = new Setting();
-      await setting.save();
-    }
-    res.json(setting);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Notifications
+router.post('/notifications', authMiddleware('admin'), adminController.sendNotification);
 
-// @route   PUT /api/admin/settings
-// @desc    Update system settings
-router.put('/settings', authMiddleware('admin'), async (req, res) => {
-  try {
-    const setting = await Setting.findOneAndUpdate({}, req.body, { new: true, upsert: true });
-    res.json({ message: 'Settings updated successfully.', setting });
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
+// Auth Account Management
+router.get('/auth-accounts', authMiddleware('admin'), adminController.getAuthAccounts);
+router.post('/auth-accounts', authMiddleware('admin'), adminController.createAuthAccount);
+router.put('/auth-accounts/:id', authMiddleware('admin'), adminController.updateAuthAccount);
+router.delete('/auth-accounts/:id', authMiddleware('admin'), adminController.deleteAuthAccount);
+router.put('/auth-config', authMiddleware('admin'), adminController.updateAuthConfig);
 
 module.exports = router;

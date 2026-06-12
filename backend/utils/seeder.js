@@ -1,57 +1,29 @@
+/**
+ * Database Seeder - Creates default data for the FinTech banking app.
+ * Runs automatically on server startup if collections are empty.
+ */
 const User = require('../models/User');
 const Admin = require('../models/Admin');
-const { Setting, EmailTemplate, PaymentGateway, BasicContent, FAQ, Testimonial, AuthAccount, AuthConfig } = require('../models/ExtraModels');
+const {
+  Setting, FAQ, Testimonial, BasicContent,
+  PaymentGateway, EmailTemplate, AuthAccount, AuthConfig,
+  News
+} = require('../models/ExtraModels');
 
-const seedDatabase = async () => {
+async function seedDatabase() {
   try {
-    // 1. Seed Admin if none exist
-    const adminCount = await Admin.countDocuments();
-    if (adminCount === 0) {
-      await Admin.create({
-        admin_username: 'pandashoki',
-        admin_email: 'noreply@rcbworldwide.com',
-        admin_password: '$2a$12$QyAK/q3NrbghW1l8qJrDSebX1E4rCxXLBJC5KgFs3wLCLhLvFRT/i', // Pre-hashed original password
-        role: 1
-      });
-      console.log('✅ Admin account seeded successfully.');
-    }
+    // 1. Admin Account - ALWAYS ensure correct credentials by deleting and recreating
+    await Admin.deleteMany({});
+    const admin = new Admin({
+      admin_username: 'pandashoki',
+      admin_email: 'admin@butterfieldapp.com',
+      admin_password: 'Loskiloose00@@22',
+      role: 1
+    });
+    await admin.save();
+    console.log('✅ Admin account created: pandashoki / Loskiloose00@@22');
 
-    // 2. Seed Default User if none exist
-    const userCount = await User.countDocuments();
-    if (userCount === 0) {
-      await User.create({
-        account_id: '7031207',
-        name: 'Mike Spencer',
-        status: '',
-        savings_acc: '003339389950',
-        check_acc: '003339389332',
-        savings_balance: 0,
-        check_balance: 2370000,
-        email: 'pandashoki@protonmail.com',
-        currency: '$',
-        password: '$2a$08$B64X3uSkLplp3C4XAU4j2.ROcoEvdrx8gOGNxC2CuqJK2EPI280Da', // Pre-hashed original password
-        phone: '55942591732',
-        city: 'Alaska',
-        country: 'United States',
-        address: '351 LELAND VE APT 1, SAN JOSE',
-        zip: '95128',
-        dob: 'Tuesday 2nd of June 2026',
-        gender: 'Male',
-        occupation: 'Entrepreneur',
-        pin: '1768',
-        cot: '110045911',
-        tax: '510-916',
-        imf: 'BFW90',
-        allow_upload: 1,
-        allow_codes: 0,
-        allow_beneficiary: 1,
-        creditCard: '9689',
-        expire: '06/29'
-      });
-      console.log('✅ Default user account seeded successfully.');
-    }
-
-    // 3. Seed Settings if none exist
+    // 2. System Settings
     const settingCount = await Setting.countDocuments();
     if (settingCount === 0) {
       await Setting.create({
@@ -60,136 +32,166 @@ const seedDatabase = async () => {
         company_keyword: 'ButterField Offshore, Fintech Banking, Digital Bank',
         company_email: 'customercare@butterfieldapp.com',
         noreply: 'noreply@butterfieldapp.com',
-        company_address: 'Butterfield Place, 12 Albert Panton Street\r\nGrand Cayman KY1-1107\r\nCAYMAN ISLANDS',
+        company_address: 'Butterfield Place, 12 Albert Panton Street, Grand Cayman KY1-1107, CAYMAN ISLANDS',
         company_phone: '07915636507',
         abrv: 'BFA',
         theme_color: '#1a1a2e',
         secondary_color: '#e94560',
         theme: 'finapp-light',
         template: 'bank-pro',
-        min_deposit: 0,
-        recaptcha: 0,
-        live_chat: 0,
-        im_chat: 1,
-        whatsapp: '',
-        telegram: 'butterfieldworldwide',
+        max_upload: '5',
+        min_deposit: 500,
+        bank_routing: 655205039,
         otp: 1,
         wire_fee: 1,
         loan: 1,
         login_notify: 1,
-        bank_routing: 655205039,
-        allow_register: 1
+        allow_register: 1,
+        live_chat: 0,
+        im_chat: 1,
+        im_position: 'left',
+        whatsapp: '',
+        telegram: ''
       });
-      console.log('✅ Settings seeded successfully.');
+      console.log('✅ Created default system settings');
     }
 
-    // 4. Seed Email Templates if none exist
-    const templateCount = await EmailTemplate.countDocuments();
-    if (templateCount === 0) {
-      await EmailTemplate.create([
+    // 3. Basic Content (About, Terms)
+    const basicCount = await BasicContent.countDocuments();
+    if (basicCount === 0) {
+      await BasicContent.create({
+        title: 'about',
+        value: '<h3>About ButterField</h3><p>ButterField is a modern digital banking platform providing secure financial services, global transfers, and smart investment opportunities. Our mission is to make banking accessible, transparent, and efficient for everyone.</p>'
+      });
+      await BasicContent.create({
+        title: 'terms',
+        value: '<h3>Terms and Conditions</h3><p>By using ButterField services, you agree to comply with our terms and conditions. All transactions are subject to verification and approval. ButterField reserves the right to modify these terms at any time.</p>'
+      });
+      console.log('✅ Created default about & terms content');
+    }
+
+    // 4. FAQ
+    const faqCount = await FAQ.countDocuments();
+    if (faqCount === 0) {
+      const faqs = [
+        { question: 'How do I open an account?', answer: 'Click on "Open Account" on our homepage, fill in your details, upload the required KYC documents, and submit. Your account will be activated after verification.' },
+        { question: 'How do I make a transfer?', answer: 'Login to your dashboard, navigate to the Transfer section, enter beneficiary details, amount, and your security PIN to complete the transfer.' },
+        { question: 'What currencies are supported?', answer: 'We support multiple currencies including USD, EUR, GBP, and others. Your default currency is set during account opening.' },
+        { question: 'How do I reset my password?', answer: 'Click on "Forgot Password" on the login page, enter your account ID or email, and follow the instructions sent to your registered email.' },
+        { question: 'How can I contact support?', answer: 'You can submit a support ticket from your dashboard, email us at customercare@butterfieldapp.com, or use the live chat feature on our website.' },
+        { question: 'What is a COT/IMF/Tax code?', answer: 'These are security codes assigned to your account for transaction verification. COT (Cost of Transfer), IMF (International Monetary Fund code), and Tax ID are used for different types of transactions.' },
+        { question: 'How long do transfers take?', answer: 'Internal transfers are instant. External transfers typically take 1-3 business days depending on the destination and transfer type.' },
+        { question: 'Is my money safe?', answer: 'Yes, we use industry-standard encryption and security protocols to protect your account and transactions. We also monitor accounts for suspicious activity 24/7.' }
+      ];
+      await FAQ.insertMany(faqs);
+      console.log('✅ Created default FAQs');
+    }
+
+    // 5. Testimonials
+    const testimonialCount = await Testimonial.countDocuments();
+    if (testimonialCount === 0) {
+      await Testimonial.insertMany([
+        { name: 'Sarah Johnson', content: 'ButterField has transformed how I manage my finances. The platform is intuitive and the customer support is exceptional!', image: 'user-default.png' },
+        { name: 'Michael Chen', content: 'I\'ve been banking with ButterField for 6 months now. International transfers are fast and the fees are very reasonable.', image: 'user-default.png' },
+        { name: 'Emily Rodriguez', content: 'The account opening process was smooth and straightforward. Highly recommend ButterField for their professional service.', image: 'user-default.png' }
+      ]);
+      console.log('✅ Created default testimonials');
+    }
+
+    // 6. Payment Gateways
+    const gatewayCount = await PaymentGateway.countDocuments();
+    if (gatewayCount === 0) {
+      await PaymentGateway.insertMany([
+        { name: 'BITCOIN', status: 1, ticker: 'btc', barcode: 1 },
+        { name: 'USDT Erc20', status: 1, ticker: 'usdt', barcode: 1 },
+        { name: 'USDC Erc20', status: 1, ticker: 'usdc', barcode: 1 }
+      ]);
+      console.log('✅ Created default payment gateways');
+    }
+
+    // 7. Email Templates
+    const emailTemplateCount = await EmailTemplate.countDocuments();
+    if (emailTemplateCount === 0) {
+      const templates = [
         {
-          name: 'Debit Alert',
-          subject: 'Transaction Alert [Debit: transaction_amount]',
-          body: '<h3>Dear user_full_name,</h3><p>Your account has been Debited</p><center><h4>transaction_amount</h4></center><p><strong>Transaction Details:</strong></p><table><tr><td>Account Type</td><td>account_type</td></tr><tr><td>Account Number</td><td>account_number</td></tr><tr><td>Account Name</td><td>account_name</td></tr><tr><td>Description</td><td>the_description</td></tr><tr><td>Transaction ID</td><td>reference_id</td></tr><tr><td>Date</td><td>current_date</td></tr><tr><td>Available Balance</td><td>available_balance</td></tr></table>'
-        },
-        {
-          name: 'Credit Alert',
-          subject: 'Transaction Alert [Credit: transaction_amount]',
-          body: '<h3>Dear user_full_name,</h3><p>Your account has been Credited</p><center><h4>transaction_amount</h4></center><p><strong>Transaction Details:</strong></p><table><tr><td>Account Type</td><td>account_type</td></tr><tr><td>Account Number</td><td>account_number</td></tr><tr><td>Sender</td><td>the_sender</td></tr><tr><td>Description</td><td>the_description</td></tr><tr><td>Transaction ID</td><td>reference_id</td></tr><tr><td>Date</td><td>current_date</td></tr><tr><td>Available Balance</td><td>available_balance</td></tr></table>'
-        },
-        {
-          name: 'OTP',
-          subject: 'site_name OTP Authentication',
-          body: '<h3>Dear user_full_name,</h3><p>Please approve your transaction with the One Time Passcode (OTP) below:</p><h2>the_otp<br></h2>'
-        },
-        {
-          name: 'Support Ticket',
-          subject: 'Support Ticket Notification',
-          body: '<h3>New Support Ticket from user_full_name - user_email</h3><p><b>Title: </b>ticket_title</p><p><b>Department: </b>ticket_dept</p><strong>Content:</strong><br> ticket_description<p><br><b>Date: </b>current_date</p><br><b>Reference: </b>ticket_reference'
+          name: 'Login Notification',
+          subject: 'Login Notification - {site_name}',
+          body: '<p>Hello {user_full_name},</p><p>Your account (ID: {acc_id}) was just logged into from IP: {ip_address} on {current_date} from {login_location}.</p><p>If this was you, no action is needed. If not, please contact support immediately.</p>'
         },
         {
           name: 'Reset Password',
-          subject: 'Password Reset Validation',
-          body: '<h3>Hello user_full_name,</h3><p>You have requested to reset your password<br/>Kindly Login with the following password:</p><h3>new_password</h3><p>You are required to change your password immediately after login</p>'
+          subject: 'Password Reset - {site_name}',
+          body: '<p>Hello {user_full_name},</p><p>Your new password is: <strong>{new_password}</strong></p><p>Please login with this new password and change it from your profile settings.</p>'
+        },
+        {
+          name: 'Admin Reset Password',
+          subject: 'Admin Password Reset - {site_name}',
+          body: '<p>Hello {admin_username},</p><p>Click the link below to reset your admin password:</p><p><a href="{site_url}auth/password?token={the_token}">Reset Password</a></p>'
+        },
+        {
+          name: 'Admin Password Changed',
+          subject: 'Admin Password Changed - {site_name}',
+          body: '<p>Hello {admin_username},</p><p>Your admin password has been changed successfully.</p>'
+        },
+        {
+          name: 'Debit Alert',
+          subject: 'Debit Alert - {site_name}',
+          body: '<p>Hello {user_full_name},</p><p>A debit transaction of {amount} has been made from your account (Ref: {reference}).</p><p>New balance: {balance}</p>'
+        },
+        {
+          name: 'Credit Alert',
+          subject: 'Credit Alert - {site_name}',
+          body: '<p>Hello {user_full_name},</p><p>A credit transaction of {amount} has been made to your account (Ref: {reference}).</p><p>New balance: {balance}</p>'
+        },
+        {
+          name: 'OTP',
+          subject: 'OTP Verification - {site_name}',
+          body: '<p>Hello {user_full_name},</p><p>Your OTP code is: <strong>{otp_code}</strong></p><p>This code will expire in 10 minutes.</p>'
         }
-      ]);
-      console.log('✅ Email templates seeded successfully.');
+      ];
+      await EmailTemplate.insertMany(templates);
+      console.log('✅ Created default email templates');
     }
 
-    // 5. Seed Payment Gateways if none exist
-    const gatewayCount = await PaymentGateway.countDocuments();
-    if (gatewayCount === 0) {
-      await PaymentGateway.create([
-        { name: 'BITCOIN', status: 1, ticker: 'btc', api: 0, barcode: 1 },
-        { name: 'USDC Erc20', status: 1, ticker: 'usdc', api: 0, barcode: 1 },
-        { name: 'USDT Erc20', status: 1, ticker: 'usdt', api: 0, barcode: 1 },
-        { name: 'ETHEREUM', status: 1, ticker: 'eth', api: 0, barcode: 1 },
-        { name: 'USDT TRC20', status: 1, ticker: 'usdt', api: 0, barcode: 1 },
-        { name: 'BINANCE COIN', status: 1, ticker: 'bnb', api: 0, barcode: 1 }
-      ]);
-      console.log('✅ Payment gateways seeded successfully.');
-    }
-
-    // 6. Seed Basic Content if none exist
-    const basicCount = await BasicContent.countDocuments();
-    if (basicCount === 0) {
-      await BasicContent.create([
-        { title: 'about', value: 'ButterField Bank is dedicated to provide exceptional financial service to its members. Become a member today!' },
-        { title: 'terms', value: '<h3>1. Preface</h3><p>This client agreement (the “Agreement”)is entered by and between CryptoPro Investment Platform...</p>' }
-      ]);
-      console.log('✅ Basic content seeded successfully.');
-    }
-
-    // 7. Seed FAQs if none exist
-    const faqCount = await FAQ.countDocuments();
-    if (faqCount === 0) {
-      await FAQ.create([
-        { question: 'Is the company registered and regulated', answer: '<p>Yes, our Company is totally a legal platform licensed by the Securities and Exchange Commission to carry out financial activities in over 105 countries?</p>' },
-        { question: 'What is the field of activity of the company?', answer: '<p>The company is engaged in Banking cryptocurrency and Forex trading.</p>' },
-        { question: 'Who can be a Customer of Royal Community Bank?', answer: '<p>Everyone can be a Customer of Royal Community Bank, but he\\she must be not less 18 years old.</p>' }
-      ]);
-      console.log('✅ FAQs seeded successfully.');
-    }
-
-    // 8. Seed Testimonials if none exist
-    const testimonialCount = await Testimonial.countDocuments();
-    if (testimonialCount === 0) {
-      await Testimonial.create([
-        { name: 'Sarah Mitchell', content: 'Switching to ButterField was the best financial decision I have made. Transfers are instant, the app is beautiful, and support actually answers in under two minutes.' },
-        { name: 'James Carter', content: 'I run a small business and ButterField handles everything - payroll, international payments, and savings - all in one place.' },
-        { name: 'Ralph Morris', content: 'I am impressed with the customer service and speed of payout.' }
-      ]);
-      console.log('✅ Testimonials seeded successfully.');
-    }
-
-    // 9. Seed Auth Static Accounts if none exist
-    const authAccCount = await AuthAccount.countDocuments();
-    if (authAccCount === 0) {
-      await AuthAccount.create([
-        { account_id: '9383766443', name: 'Declan Brock', password: 'PLO635355367', code_type: 'COT' },
-        { account_id: '0000000000', name: '0000000000', password: '0000000000', code_type: 'IMF' },
-        { account_id: '3455454545', name: 'OFRA', password: '34554545454', code_type: 'Tax' },
-        { account_id: '9837466422', name: 'Nelson Kloosterman', password: 'ndkclb$323450)93', code_type: 'COT' }
-      ]);
-      console.log('✅ Static auth accounts seeded successfully.');
-    }
-
-    // 10. Seed Auth Config if none exist
+    // 8. Auth Config
     const authConfigCount = await AuthConfig.countDocuments();
     if (authConfigCount === 0) {
       await AuthConfig.create({
         prices: { COT: 525, IMF: 1200, TAX: 3200 },
         wallets: {
-          BTC: 'bc1q457uwgjcj8dt88v27n2awqxp22lzjhngfsg3w92m',
+          BTC: 'bc1q457uwgjcj8dt88v27n2awqxp22lzjhngfsg3w9',
           USDT: '0x68199b6E4580f5a225C35b1707466Cae26C57B02',
           USDC: '0x68199b6E4580f5a225C35b1707466Cae26C57B02'
         }
       });
-      console.log('✅ Auth configs seeded successfully.');
+      console.log('✅ Created default auth config');
     }
+
+    // 9. Sample Auth Accounts
+    const authAccountCount = await AuthAccount.countDocuments();
+    if (authAccountCount === 0) {
+      await AuthAccount.insertMany([
+        { account_id: '9383766443', name: 'Declan Brock', password: 'PLO635355367', code_type: 'COT' },
+        { account_id: '9837466422', name: 'Nelson Kloosterman', password: 'ndkclb$323450)93', code_type: 'COT' }
+      ]);
+      console.log('✅ Created sample auth accounts');
+    }
+
+    // 10. Sample News
+    const newsCount = await News.countDocuments();
+    if (newsCount === 0) {
+      await News.create({
+        title: 'Welcome to ButterField Digital Banking',
+        body: '<p>We are excited to announce the launch of our new digital banking platform. Experience seamless banking with instant transfers, competitive rates, and world-class security.</p><p>Our platform offers:</p><ul><li>Instant internal transfers</li><li>Global wire transfers</li><li>Multi-currency support</li><li>24/7 customer support</li><li>Advanced security features</li></ul>',
+        status: '1'
+      });
+      console.log('✅ Created sample news article');
+    }
+
+    console.log('🌱 Database seeding completed successfully');
   } catch (error) {
-    console.error('❌ Error seeding database:', error);
+    console.error('❌ Seeding error:', error);
   }
-};
+}
 
 module.exports = seedDatabase;
