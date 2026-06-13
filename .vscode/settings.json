@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./mcp/src/ecs-mcp-server/tests/unit/test_status_",
+        "./mcp/src/ecs-mcp-server/tests/unit/test_status_",
+        "./mcp/src/ecs-mcp-server/tests/unit/test_status_"
+    ]
+}
