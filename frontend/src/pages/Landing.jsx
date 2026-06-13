@@ -8,13 +8,22 @@ export default function Landing({ settings }) {
     fetch('/api/public/testimonials').then(r => r.json()).then(d => setTestimonials(d)).catch(() => {});
   }, []);
 
+  const features = [
+    { icon: 'fa-university', color: 'var(--bf-primary)', bg: 'rgba(255,78,200,0.12)', title: 'Smart Banking', desc: 'High-yield savings and premium checking accounts with zero monthly fees and instant access to your funds.' },
+    { icon: 'fa-globe', color: 'var(--bf-success)', bg: 'rgba(46,213,115,0.15)', title: 'Global Transfers', desc: 'Send money worldwide with competitive exchange rates and instant delivery to over 150 countries.' },
+    { icon: 'fa-chart-pie', color: 'var(--bf-secondary)', bg: 'rgba(78,158,255,0.15)', title: 'Smart Investments', desc: 'AI-powered investment portfolios with real-time analytics and personalized recommendations.' },
+    { icon: 'fa-shield-alt', color: 'var(--bf-primary)', bg: 'rgba(255,78,200,0.12)', title: 'Bank-Grade Security', desc: 'Biometric login, real-time fraud alerts, and 256-bit SSL encrypted transactions.' },
+    { icon: 'fa-wallet', color: 'var(--bf-secondary)', bg: 'rgba(78,158,255,0.15)', title: 'Digital Wallet', desc: 'Manage all your cards, payments, and rewards in one secure digital wallet.' },
+    { icon: 'fa-headset', color: 'var(--bf-success)', bg: 'rgba(46,213,115,0.15)', title: '24/7 Support', desc: 'Round-the-clock customer support with dedicated account managers for premium users.' },
+  ];
+
   return (
     <div>
       {/* Hero */}
       <section className="bf-hero">
         <div className="bf-hero-content">
           <div className="bf-hero-text">
-            <h1>Modern <span className="highlight">Digital Banking</span> for the <span className="highlight-gold">Future</span></h1>
+            <h1>Modern <span className="highlight">Digital Banking</span> for the <span className="highlight-secondary">Future</span></h1>
             <p>Smart Investments, Global Transfers, and Secure Savings — all in one place. Experience banking reimagined with ButterField.</p>
             <div className="bf-hero-buttons">
               <Link to="/register" className="bf-btn bf-btn-primary">Open Account <i className="fas fa-arrow-right"></i></Link>
@@ -54,18 +63,11 @@ export default function Landing({ settings }) {
       <section className="bf-section">
         <div className="bf-section-header">
           <span className="bf-eyebrow">Why ButterField</span>
-          <h2>Banking Made <span className="highlight">Simple</span> & <span className="highlight-gold">Secure</span></h2>
+          <h2>Banking Made <span className="highlight">Simple</span> & <span className="highlight-secondary">Secure</span></h2>
           <p>Experience the future of digital banking with our comprehensive suite of financial services.</p>
         </div>
         <div className="bf-grid-3">
-          {[
-            { icon: 'fa-university', color: 'var(--bf-accent)', bg: 'rgba(233,69,96,0.15)', title: 'Smart Banking', desc: 'High-yield savings and premium checking accounts with zero monthly fees and instant access to your funds.' },
-            { icon: 'fa-globe', color: 'var(--bf-success)', bg: 'rgba(46,213,115,0.15)', title: 'Global Transfers', desc: 'Send money worldwide with competitive exchange rates and instant delivery to over 150 countries.' },
-            { icon: 'fa-chart-pie', color: 'var(--bf-gold)', bg: 'rgba(245,166,35,0.15)', title: 'Smart Investments', desc: 'AI-powered investment portfolios with real-time analytics and personalized recommendations.' },
-            { icon: 'fa-shield-alt', color: 'var(--bf-info)', bg: 'rgba(55,66,250,0.15)', title: 'Bank-Grade Security', desc: 'Biometric login, real-time fraud alerts, and 256-bit SSL encrypted transactions.' },
-            { icon: 'fa-wallet', color: 'var(--bf-accent)', bg: 'rgba(233,69,96,0.15)', title: 'Digital Wallet', desc: 'Manage all your cards, payments, and rewards in one secure digital wallet.' },
-            { icon: 'fa-headset', color: 'var(--bf-success)', bg: 'rgba(46,213,115,0.15)', title: '24/7 Support', desc: 'Round-the-clock customer support with dedicated account managers for premium users.' },
-          ].map((f, i) => (
+          {features.map((f, i) => (
             <div key={i} className="bf-feature-card">
               <div className="bf-feature-icon" style={{ background: f.bg, color: f.color }}><i className={`fas ${f.icon}`}></i></div>
               <h3>{f.title}</h3>
@@ -79,7 +81,7 @@ export default function Landing({ settings }) {
       <section className="bf-section bf-rates-section">
         <div className="bf-section-header">
           <span className="bf-eyebrow">Competitive Rates</span>
-          <h2>Best <span className="highlight-gold">Rates</span> in the Market</h2>
+          <h2>Best <span className="highlight">Rates</span> in the Market</h2>
           <p>Maximize your earnings with our industry-leading interest rates and investment returns.</p>
         </div>
         <div className="bf-grid-4">
@@ -87,7 +89,7 @@ export default function Landing({ settings }) {
             { label: 'Savings Rate', value: '4.5%', period: ' APY', name: 'High-Yield Savings', link: '/save' },
             { label: 'Checking Rate', value: '2.8%', period: ' APY', name: 'Premium Checking', link: '/bank' },
             { label: 'Investment Return', value: '12.5%', period: ' /yr', name: 'Smart Portfolio', link: '/invest' },
-            { label: 'Loan Rate', value: '3.9%', period: ' APR', name: 'Personal Loans', link: '/borrow' },
+            { label: 'Loan Rate', value: '3.9%', period: ' APR from', name: 'Personal Loans', link: '/borrow' },
           ].map((r, i) => (
             <div key={i} className="bf-rate-card">
               <div className="bf-rate-label">{r.label}</div>
@@ -138,7 +140,7 @@ export default function Landing({ settings }) {
               <div className="bf-testimonial-stars">★★★★★</div>
               <p>"{t.content}"</p>
               <div className="bf-testimonial-author">
-                <div className="bf-testimonial-avatar" style={{ background: i % 2 === 0 ? 'var(--bf-gradient-accent)' : 'var(--bf-gradient-gold)' }}>
+                <div className="bf-testimonial-avatar" style={{ background: i % 2 === 0 ? 'var(--bf-gradient-primary)' : 'var(--bf-gradient-secondary)' }}>
                   {t.name ? t.name.charAt(0).toUpperCase() : 'U'}
                 </div>
                 <div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getAuthConfig, submitAuthTicket } from '../api';
 
@@ -68,14 +68,15 @@ export default function PaymentProcess() {
   const showWallet = ['BTC', 'USDT', 'USDC'].includes(method);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#f3f9ff', fontFamily: 'Segoe UI, sans-serif', flexDirection: 'column' }}>
-      <div style={{ maxWidth: '600px', width: '90%', background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 6px 18px rgba(0,0,0,0.1)', textAlign: 'center' }}>
-        <h2>💸 Complete Your Payment</h2>
-        <p style={{ color: '#dc3545', fontWeight: 'bold', fontSize: '18px' }}>⏳ Time left: {String(mins).padStart(2,'0')}:{String(secs).padStart(2,'0')}</p>
-        <p>Code Type: <strong>{codeType}</strong> | Amount: <strong>${Number(price).toLocaleString()}</strong></p>
-        {message && <div style={{ background: '#ffe', padding: '8px', borderRadius: '6px', margin: '10px 0' }}>{message}</div>}
+    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Segoe UI, sans-serif', flexDirection: 'column', padding: '24px' }}>
+      <div style={{ maxWidth: '600px', width: '100%', background: '#0D0D0D', border: '1px solid #1A1A1A', padding: '30px', borderRadius: '16px', textAlign: 'center' }}>
+        <div style={{ fontSize: '2rem', marginBottom: '8px' }}>💸</div>
+        <h2 style={{ color: '#fff', marginBottom: '8px' }}>Complete Your Payment</h2>
+        <p style={{ color: '#FF4EC8', fontWeight: 'bold', fontSize: '18px', marginBottom: '8px' }}>⏳ Time left: {String(mins).padStart(2,'0')}:{String(secs).padStart(2,'0')}</p>
+        <p style={{ color: '#B3B3B3' }}>Code Type: <strong style={{ color: '#fff' }}>{codeType}</strong> | Amount: <strong style={{ color: '#FF4EC8' }}>${Number(price).toLocaleString()}</strong></p>
+        {message && <div style={{ background: 'rgba(255,78,200,0.12)', color: '#FF4EC8', padding: '8px', borderRadius: '6px', margin: '10px 0', border: '1px solid rgba(255,78,200,0.25)' }}>{message}</div>}
 
-        <select value={method} onChange={(e) => setMethod(e.target.value)} style={{ width: '70%', padding: '10px', margin: '15px auto', borderRadius: '8px', border: '1px solid #ccc', display: 'block', fontSize: '16px' }}>
+        <select value={method} onChange={(e) => setMethod(e.target.value)} style={{ width: '80%', padding: '12px', margin: '15px auto', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', display: 'block', fontSize: '16px', outline: 'none' }}>
           <option value="">-- Select Payment Method --</option>
           <option value="BTC">Bitcoin (BTC)</option>
           <option value="USDT">USDT (ERC20)</option>
@@ -86,33 +87,31 @@ export default function PaymentProcess() {
         </select>
 
         {showWallet && wallet[method] && (
-          <div style={{ marginTop: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '8px', transition: 'all 0.3s' }}>
-            <p><strong>{method} Address:</strong></p>
-            <code style={{ wordBreak: 'break-word', display: 'block', margin: '5px 0' }}>{wallet[method]}</code>
-            <img src={qrUrl(wallet[method])} alt="QR" style={{ width: '150px', height: '150px', marginTop: '10px' }} />
+          <div style={{ marginTop: '20px', padding: '15px', border: '1px solid #1A1A1A', borderRadius: '12px', background: 'rgba(0,0,0,0.3)' }}>
+            <p style={{ color: '#fff' }}><strong>{method} Address:</strong></p>
+            <code style={{ wordBreak: 'break-word', display: 'block', margin: '5px 0', color: '#B3B3B3', fontSize: '0.85rem' }}>{wallet[method]}</code>
+            <img src={qrUrl(wallet[method])} alt="QR" style={{ width: '150px', height: '150px', marginTop: '10px', border: '1px solid #1A1A1A', borderRadius: '8px' }} />
             <br />
-            <button onClick={() => copyToClipboard(wallet[method])} style={{ marginTop: '10px', padding: '8px 15px', background: '#28a745', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>Copy Address</button>
+            <button onClick={() => copyToClipboard(wallet[method])} style={{ marginTop: '10px', padding: '8px 15px', background: '#FF4EC8', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>Copy Address</button>
           </div>
         )}
 
         {method && !['BTC', 'USDT', 'USDC'].includes(method) && (
-          <p style={{ color: '#888', marginTop: '20px' }}>Please contact support for {method} payment instructions.</p>
+          <p style={{ color: '#666', marginTop: '20px' }}>Please contact support for {method} payment instructions.</p>
         )}
 
         {showWallet && wallet[method] && (
-          <>
-            <button onClick={handlePaid} style={{ width: '100%', padding: '14px', marginTop: '20px', background: '#28a745', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', fontSize: '16px' }}>✅ I've Paid</button>
-          </>
+          <button onClick={handlePaid} style={{ width: '100%', padding: '14px', marginTop: '20px', background: '#2ed573', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', fontSize: '16px' }}>✅ I've Paid</button>
         )}
       </div>
 
       {showPopup && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}>
-          <div style={{ background: 'white', padding: '30px', borderRadius: '8px', maxWidth: '400px', width: '90%', textAlign: 'center', position: 'relative' }}>
-            <span onClick={() => setShowPopup(false)} style={{ position: 'absolute', top: 10, right: 15, fontSize: '24px', cursor: 'pointer' }}>❌</span>
-            <h3>Enter Transaction Hash</h3>
-            <input type="text" placeholder="Transaction Hash ID" value={txHash} onChange={(e) => setTxHash(e.target.value)} style={{ width: '80%', padding: '12px', marginTop: '15px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px' }} />
-            <button onClick={confirmHash} disabled={txHash.trim().length < 10} style={{ width: '100%', padding: '12px', marginTop: '20px', background: txHash.trim().length >= 10 ? '#28a745' : '#aaa', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: txHash.trim().length >= 10 ? 'pointer' : 'not-allowed' }}>Confirm Payment</button>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}>
+          <div style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', padding: '30px', borderRadius: '16px', maxWidth: '400px', width: '90%', textAlign: 'center', position: 'relative' }}>
+            <span onClick={() => setShowPopup(false)} style={{ position: 'absolute', top: 10, right: 15, fontSize: '24px', cursor: 'pointer', color: '#666' }}>✕</span>
+            <h3 style={{ color: '#fff', marginBottom: '16px' }}>Enter Transaction Hash</h3>
+            <input type="text" placeholder="Transaction Hash ID" value={txHash} onChange={(e) => setTxHash(e.target.value)} style={{ width: '80%', padding: '12px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '16px', outline: 'none' }} />
+            <button onClick={confirmHash} disabled={txHash.trim().length < 10} style={{ width: '100%', padding: '12px', marginTop: '20px', background: txHash.trim().length >= 10 ? '#FF4EC8' : '#1A1A1A', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: txHash.trim().length >= 10 ? 'pointer' : 'not-allowed' }}>Confirm Payment</button>
           </div>
         </div>
       )}

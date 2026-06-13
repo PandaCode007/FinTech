@@ -27,21 +27,36 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full">
-        <h2 className="text-3xl font-bold text-center text-primary mb-6">Sign In</h2>
-        {message && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">{message}</div>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input name="email" type="email" placeholder="Email Address" className="input-field" onChange={handleChange} required />
-          <input name="password" type="password" placeholder="Password" className="input-field" onChange={handleChange} required />
-          <button type="submit" className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition">Sign In</button>
-        </form>
-        <p className="text-center mt-4 text-gray-500">
-          Don't have an account? <Link to="/register" className="text-secondary hover:underline">Register</Link>
-        </p>
-        <p className="text-center mt-2">
-          <Link to="/" className="text-sm text-gray-400 hover:underline">Home</Link>
-        </p>
+    <div className="bf-auth-page">
+      <div className="bf-auth-form">
+        <div className="bf-login-modal" style={{ maxWidth: '100%', padding: '40px 32px' }}>
+          <div className="bf-modal-icon"><i className="fas fa-lock"></i></div>
+          <h3>Sign In</h3>
+          <p>Welcome back to ButterField</p>
+          {message && <div style={{ padding: '12px 16px', borderRadius: '10px', marginBottom: '20px', fontSize: '0.85rem', background: 'rgba(255,78,200,0.12)', color: 'var(--bf-primary)', border: '1px solid rgba(255,78,200,0.25)' }}>{message}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="bf-form-group">
+              <label>Email Address</label>
+              <input name="email" type="email" placeholder="your@email.com" onChange={handleChange} required />
+            </div>
+            <div className="bf-form-group">
+              <label>Password</label>
+              <input name="password" type="password" placeholder="Enter your password" onChange={handleChange} required />
+            </div>
+            <button className="bf-btn bf-btn-primary" type="submit" style={{ width: '100%', justifyContent: 'center', padding: '14px' }}>
+              Sign In <i className="fas fa-arrow-right"></i>
+            </button>
+          </form>
+          <div className="bf-modal-footer">
+            <span style={{ color: 'var(--bf-text-muted)', fontSize: '0.85rem' }}>
+              Don't have an account?{' '}
+              <Link to="/register" style={{ color: 'var(--bf-primary)' }}>Register</Link>
+            </span>
+          </div>
+          <div className="bf-modal-footer">
+            <Link to="/">Back to Home</Link>
+          </div>
+        </div>
       </div>
     </div>
   );

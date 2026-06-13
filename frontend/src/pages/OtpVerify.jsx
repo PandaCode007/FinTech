@@ -23,15 +23,23 @@ export default function OtpVerify() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
-        <h2 className="text-2xl font-bold text-primary mb-2">OTP Verification</h2>
-        <p className="text-gray-500 mb-6">A code has been sent to {email}</p>
-        {message && <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">{message}</div>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="Enter 6-digit OTP" className="input-field text-center text-2xl tracking-widest" required maxLength={6} />
-          <button type="submit" className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-opacity-90">Verify OTP</button>
-        </form>
+    <div className="bf-auth-page">
+      <div className="bf-auth-form">
+        <div className="bf-login-modal" style={{ maxWidth: '100%', padding: '40px 32px', textAlign: 'center' }}>
+          <div className="bf-modal-icon"><i className="fas fa-shield-alt"></i></div>
+          <h3>OTP Verification</h3>
+          <p>A verification code has been sent to {email}</p>
+          {message && <div style={{ padding: '12px 16px', borderRadius: '10px', marginBottom: '20px', fontSize: '0.85rem', background: 'rgba(255,78,200,0.12)', color: 'var(--bf-primary)', border: '1px solid rgba(255,78,200,0.25)' }}>{message}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="bf-form-group">
+              <label>Enter 6-digit OTP</label>
+              <input value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="000000" style={{ textAlign: 'center', fontSize: '1.5rem', letterSpacing: '8px', fontFamily: 'monospace' }} required maxLength={6} />
+            </div>
+            <button className="bf-btn bf-btn-primary" type="submit" style={{ width: '100%', justifyContent: 'center' }}>
+              Verify OTP <i className="fas fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

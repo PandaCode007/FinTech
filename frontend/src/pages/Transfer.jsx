@@ -9,7 +9,7 @@ export default function Transfer() {
     receiverAcc: '', amount: '', swift: '', routing: '', address: '', remarks: '', pin: ''
   });
   const [message, setMessage] = useState('');
-  const [codeStage, setCodeStage] = useState(null); // null | 'COT' | 'IMF' | 'TAX'
+  const [codeStage, setCodeStage] = useState(null);
   const [ref, setRef] = useState('');
   const [codeInput, setCodeInput] = useState('');
 
@@ -50,44 +50,43 @@ export default function Transfer() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-primary text-white px-6 py-4 flex justify-between items-center shadow-lg">
-        <Link to="/dashboard" className="text-xl font-bold">ButterField</Link>
-        <span>Transfer</span>
+    <div style={{ minHeight: '100vh', background: '#000' }}>
+      <nav style={{ background: '#0D0D0D', borderBottom: '1px solid #1A1A1A', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Link to="/dashboard" style={{ color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: '1.2rem' }}>ButterField</Link>
+        <span style={{ color: '#B3B3B3' }}>Transfer</span>
       </nav>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6">Make a Transfer</h2>
-        {message && <div className={`px-4 py-2 rounded mb-4 ${message.includes('success') ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{message}</div>}
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '32px 24px' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '24px', color: '#fff' }}>Make a Transfer</h2>
+        {message && <div style={{ padding: '12px 16px', borderRadius: '10px', marginBottom: '16px', fontSize: '0.85rem', background: message.includes('success') ? 'rgba(46,213,115,0.15)' : 'rgba(255,78,200,0.12)', color: message.includes('success') ? '#2ed573' : 'var(--bf-primary)', border: `1px solid ${message.includes('success') ? 'rgba(46,213,115,0.25)' : 'rgba(255,78,200,0.25)'}` }}>{message}</div>}
 
         {codeStage ? (
-          <form onSubmit={handleCodeVerify} className="bg-white p-6 rounded-xl shadow space-y-4">
-            <h3 className="font-bold text-lg">Enter {codeStage} Code</h3>
-            <input value={codeInput} onChange={(e) => setCodeInput(e.target.value)} placeholder={`${codeStage} Code`} className="input-field" required />
-            <button type="submit" className="bg-primary text-white px-6 py-2 rounded-lg">Verify</button>
+          <form onSubmit={handleCodeVerify} style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', borderRadius: '16px', padding: '24px' }}>
+            <h3 style={{ fontWeight: 700, marginBottom: '16px', color: '#fff' }}>Enter {codeStage} Code</h3>
+            <input value={codeInput} onChange={(e) => setCodeInput(e.target.value)} placeholder={`${codeStage} Code`} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '16px', boxSizing: 'border-box' }} required />
+            <button type="submit" className="bf-btn bf-btn-primary" style={{ justifyContent: 'center' }}>Verify</button>
           </form>
         ) : (
-          <form onSubmit={handleTransfer} className="bg-white p-6 rounded-xl shadow space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <select name="accountType" onChange={handleChange} className="input-field">
+          <form onSubmit={handleTransfer} style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', borderRadius: '16px', padding: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }}>
+              <select name="accountType" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}>
                 <option value="checking">Checking</option>
                 <option value="savings">Savings</option>
               </select>
-              <select name="type" onChange={handleChange} className="input-field">
+              <select name="type" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}>
                 <option value="wire">Wire Transfer</option>
                 <option value="local">Local Transfer</option>
                 <option value="internal">Internal Transfer</option>
               </select>
             </div>
-            <input name="bankName" placeholder="Bank Name" className="input-field" onChange={handleChange} />
-            <input name="receiverName" placeholder="Receiver Name" className="input-field" onChange={handleChange} required />
-            <input name="receiverAcc" placeholder="Receiver Account Number" className="input-field" onChange={handleChange} required />
-            <input name="amount" type="number" placeholder="Amount" className="input-field" onChange={handleChange} required />
-            <input name="swift" placeholder="SWIFT Code (optional)" className="input-field" onChange={handleChange} />
-            <input name="routing" placeholder="Routing Number" className="input-field" onChange={handleChange} />
-            <input name="address" placeholder="Bank Address" className="input-field" onChange={handleChange} />
-            <input name="remarks" placeholder="Remarks (optional)" className="input-field" onChange={handleChange} />
-            <input name="pin" type="password" placeholder="Transaction PIN" className="input-field" onChange={handleChange} required />
-            <button type="submit" className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-red-500">Submit Transfer</button>
+            <input name="bankName" placeholder="Bank Name" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="receiverName" placeholder="Receiver Name" onChange={handleChange} required style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="receiverAcc" placeholder="Receiver Account Number" onChange={handleChange} required style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="amount" type="number" placeholder="Amount" onChange={handleChange} required style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="swift" placeholder="SWIFT Code (optional)" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="routing" placeholder="Routing Number" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="remarks" placeholder="Remarks (optional)" onChange={handleChange} style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '12px', boxSizing: 'border-box' }} />
+            <input name="pin" type="password" placeholder="Transaction PIN" onChange={handleChange} required style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A', background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit', marginBottom: '16px', boxSizing: 'border-box' }} />
+            <button className="bf-btn bf-btn-primary" type="submit" style={{ width: '100%', justifyContent: 'center' }}>Submit Transfer</button>
           </form>
         )}
       </div>

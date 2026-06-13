@@ -7,9 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#1a1a2e",
-        secondary: "#e94560",
-        bankNavy: "#011f4c",
+        bf: {
+          bg: "#000000",
+          surface: "#0D0D0D",
+          primary: "#FF4EC8",
+          secondary: "#4E9EFF",
+          text: "#FFFFFF",
+          muted: "#B3B3B3",
+          border: "#1A1A1A",
+        }
       }
     },
   },

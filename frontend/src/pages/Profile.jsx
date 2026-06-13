@@ -41,18 +41,17 @@ export default function Profile({ settings }) {
   };
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: 'var(--bf-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', color: 'var(--bf-accent)' }}></i>
+    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', color: 'var(--bf-primary)' }}></i>
     </div>
   );
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bf-dark)' }}>
-      {/* Dashboard Header */}
-      <div style={{ background: 'rgba(10,10,26,0.85)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 24px', position: 'sticky', top: 0, zIndex: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000' }}>
+      <div style={{ background: '#0D0D0D', borderBottom: '1px solid #1A1A1A', padding: '16px 24px', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/dashboard" style={{ color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: '1.2rem' }}>
-            <i className="fas fa-arrow-left" style={{ marginRight: '12px', color: 'var(--bf-accent)' }}></i>My Profile
+            <i className="fas fa-arrow-left" style={{ marginRight: '12px', color: 'var(--bf-primary)' }}></i>My Profile
           </Link>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <Link to="/dashboard" className="bf-btn bf-btn-outline" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Dashboard</Link>
@@ -62,7 +61,6 @@ export default function Profile({ settings }) {
       </div>
 
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '32px 24px' }}>
-        {/* Profile Card */}
         <div className="bf-feature-card" style={{ textAlign: 'center', marginBottom: '32px', padding: '40px' }}>
           <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--bf-gradient-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '2rem', color: '#fff' }}>
             {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
@@ -75,21 +73,20 @@ export default function Profile({ settings }) {
               <div style={{ fontSize: '0.75rem', color: 'var(--bf-text-muted)' }}>Account Number</div>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--bf-gold)' }}>{user?.balance ? `$${parseFloat(user.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}` : '$0.00'}</div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--bf-primary)' }}>{user?.balance ? `$${parseFloat(user.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}` : '$0.00'}</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--bf-text-muted)' }}>Balance</div>
             </div>
           </div>
         </div>
 
-        {/* Edit Form */}
         <div className="bf-feature-card" style={{ padding: '32px' }}>
           <h3 style={{ color: '#fff', marginBottom: '24px', fontSize: '1.2rem' }}>
-            <i className="fas fa-user-edit" style={{ marginRight: '10px', color: 'var(--bf-accent)' }}></i>Edit Profile
+            <i className="fas fa-user-edit" style={{ marginRight: '10px', color: 'var(--bf-primary)' }}></i>Edit Profile
           </h3>
           {message && (
             <div style={{ padding: '12px 16px', borderRadius: '10px', marginBottom: '20px', fontSize: '0.9rem',
-              background: message.includes('success') ? 'rgba(46,213,115,0.15)' : 'rgba(233,69,96,0.15)',
-              color: message.includes('success') ? 'var(--bf-success)' : 'var(--bf-accent)' }}>
+              background: message.includes('success') ? 'rgba(46,213,115,0.15)' : 'rgba(255,78,200,0.12)',
+              color: message.includes('success') ? 'var(--bf-success)' : 'var(--bf-primary)' }}>
               {message}
             </div>
           )}
@@ -100,11 +97,11 @@ export default function Profile({ settings }) {
               { name: 'phone', label: 'Phone Number', type: 'tel', value: user?.phone || '' },
               { name: 'address', label: 'Address', type: 'text', value: user?.address || '' },
             ].map((field, i) => (
-              <div key={i} style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', marginBottom: '6px', fontWeight: 500 }}>{field.label}</label>
+              <div key={i} className="bf-form-group">
+                <label>{field.label}</label>
                 <input name={field.name} type={field.type} defaultValue={field.value}
-                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)',
-                    background: 'rgba(255,255,255,0.06)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit' }} />
+                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '1px solid #1A1A1A',
+                    background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '0.95rem', outline: 'none', fontFamily: 'inherit' }} />
               </div>
             ))}
             <button className="bf-btn bf-btn-primary" type="submit" disabled={saving}

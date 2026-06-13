@@ -27,24 +27,30 @@ export default function AuthLogin() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: 'url(/images/background.png)', backgroundSize: 'cover', fontFamily: 'Segoe UI, sans-serif' }}>
-      <div style={{ background: 'white', padding: '30px', maxWidth: '400px', width: '90%', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', textAlign: 'center' }}>
-        <img src="/images/logo.png" alt="Logo" style={{ width: '90px', marginBottom: '10px' }} />
-        <h2>🔐 Account Authenticator</h2>
-        <p style={{ marginBottom: '20px' }}>Access Codes Required to process International Transfers!</p>
-        {message && <div style={{ background: '#fee', color: '#c00', padding: '8px', borderRadius: '6px', marginBottom: '10px' }}>{message}</div>}
+    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Segoe UI, sans-serif' }}>
+      <div style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', padding: '30px', maxWidth: '400px', width: '90%', borderRadius: '16px', textAlign: 'center' }}>
+        <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,78,200,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '1.5rem', color: '#FF4EC8' }}>
+          <i className="fas fa-lock"></i>
+        </div>
+        <h2 style={{ color: '#fff', marginBottom: '4px' }}>Account Authenticator</h2>
+        <p style={{ color: '#B3B3B3', marginBottom: '20px', fontSize: '0.9rem' }}>Access codes required for international transfers</p>
+        {message && <div style={{ background: 'rgba(255,78,200,0.12)', color: '#FF4EC8', padding: '8px', borderRadius: '6px', marginBottom: '10px', fontSize: '0.85rem', border: '1px solid rgba(255,78,200,0.25)' }}>{message}</div>}
         <form onSubmit={handleSubmit}>
-          <input type="tel" placeholder="Enter 10-digit Account ID" maxLength={10} value={accountId}
-            onChange={(e) => setAccountId(e.target.value)}
-            style={{ width: '100%', padding: '12px', marginTop: '10px', borderRadius: '6px', border: `2px solid ${accountId ? (idValid ? 'green' : 'red') : '#ccc'}`, boxSizing: 'border-box', fontSize: '16px' }} required />
-          <div style={{ position: 'relative', width: '100%' }}>
+          <div style={{ marginBottom: '12px' }}>
+            <label style={{ display: 'block', textAlign: 'left', fontSize: '0.82rem', color: '#B3B3B3', marginBottom: '6px', fontWeight: 500 }}>Account ID</label>
+            <input type="tel" placeholder="Enter 10-digit Account ID" maxLength={10} value={accountId}
+              onChange={(e) => setAccountId(e.target.value)}
+              style={{ width: '100%', padding: '12px', borderRadius: '10px', border: `2px solid ${accountId ? (idValid ? '#2ed573' : '#FF4EC8') : '#1A1A1A'}`, background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '16px', boxSizing: 'border-box', outline: 'none', fontFamily: 'inherit' }} required />
+          </div>
+          <div style={{ position: 'relative', marginBottom: '16px' }}>
+            <label style={{ display: 'block', textAlign: 'left', fontSize: '0.82rem', color: '#B3B3B3', marginBottom: '6px', fontWeight: 500 }}>Password</label>
             <input type={showPass ? 'text' : 'password'} placeholder="Enter Password" value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={{ width: '100%', padding: '12px', marginTop: '10px', borderRadius: '6px', border: `2px solid ${password ? (passValid ? 'green' : 'red') : '#ccc'}`, boxSizing: 'border-box', fontSize: '16px', paddingRight: '40px' }} required />
-            <span onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', top: '50%', right: '12px', transform: 'translateY(-50%)', cursor: 'pointer', fontSize: '20px' }}>{showPass ? '🙈' : '💰'}</span>
+              style={{ width: '100%', padding: '12px', borderRadius: '10px', border: `2px solid ${password ? (passValid ? '#2ed573' : '#FF4EC8') : '#1A1A1A'}`, background: 'rgba(0,0,0,0.4)', color: '#fff', fontSize: '16px', boxSizing: 'border-box', outline: 'none', fontFamily: 'inherit', paddingRight: '40px' }} required />
+            <span onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', bottom: '12px', right: '12px', cursor: 'pointer', fontSize: '18px' }}>{showPass ? '🙈' : '💰'}</span>
           </div>
           <button type="submit" disabled={!idValid || !passValid}
-            style={{ width: '100%', padding: '12px', marginTop: '15px', borderRadius: '6px', border: 'none', fontSize: '16px', fontWeight: 'bold', background: (idValid && passValid) ? '#28a745' : 'gray', color: 'white', cursor: (idValid && passValid) ? 'pointer' : 'not-allowed' }}>
+            style={{ width: '100%', padding: '14px', borderRadius: '10px', border: 'none', fontSize: '16px', fontWeight: 'bold', background: (idValid && passValid) ? '#FF4EC8' : '#1A1A1A', color: '#fff', cursor: (idValid && passValid) ? 'pointer' : 'not-allowed' }}>
             Verify Account
           </button>
         </form>

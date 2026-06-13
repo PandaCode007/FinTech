@@ -33,7 +33,7 @@ export default function About({ settings }) {
         </div>
 
         <div className="bf-section-header">
-          <h2>Our <span className="highlight-gold">Values</span></h2>
+          <h2>Our <span className="highlight-secondary">Values</span></h2>
         </div>
         <div className="bf-grid-3">
           {[
@@ -42,7 +42,7 @@ export default function About({ settings }) {
             { icon: 'fa-heart', title: 'Transparency', desc: 'No hidden fees, no surprises. We believe in clear, honest communication.' },
           ].map((v, i) => (
             <div key={i} className="bf-feature-card" style={{ textAlign: 'center' }}>
-              <div className="bf-feature-icon" style={{ background: 'rgba(245,166,35,0.15)', color: 'var(--bf-gold)', margin: '0 auto 20px' }}>
+              <div className="bf-feature-icon" style={{ background: i === 0 ? 'rgba(255,78,200,0.12)' : i === 1 ? 'rgba(78,158,255,0.12)' : 'rgba(255,78,200,0.12)', color: i === 0 ? 'var(--bf-primary)' : i === 1 ? 'var(--bf-secondary)' : 'var(--bf-primary)', margin: '0 auto 20px' }}>
                 <i className={`fas ${v.icon}`}></i>
               </div>
               <h3>{v.title}</h3>
@@ -52,7 +52,6 @@ export default function About({ settings }) {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="bf-section" style={{ textAlign: 'center' }}>
         <div className="bf-section-header">
           <h2>Ready to <span className="highlight">Get Started</span>?</h2>

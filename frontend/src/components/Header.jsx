@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Header({ settings }) {
@@ -7,12 +7,12 @@ export default function Header({ settings }) {
   const [showRegister, setShowRegister] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  // Track scroll for header class
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
-      setScrolled(window.scrollY > 50);
-    }, { passive: true });
-  }
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -32,9 +32,9 @@ export default function Header({ settings }) {
           <Link to="/" className="bf-logo">
             <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
               <rect width="38" height="38" rx="10" fill="url(#logo-grad)" />
-              <path d="M10 26V14h6v12h-6zm12 0V10h6v16h-6z" fill="white" opacity="0.2"/>
+              <path d="M10 26V14h6v12h-6zm12 0V10h6v16h-6z" fill="white" opacity="0.15"/>
               <path d="M10 22L19 10l9 12" stroke="white" strokeWidth="2" fill="none"/>
-              <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="38" y2="38"><stop stopColor="#e94560"/><stop offset="1" stopColor="#ff6b81"/></linearGradient></defs>
+              <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="38" y2="38"><stop stopColor="#FF4EC8"/><stop offset="1" stopColor="#4E9EFF"/></linearGradient></defs>
             </svg>
             <span className="bf-logo-text">ButterField <span className="bf-logo-badge">Fintech</span></span>
           </Link>
@@ -50,7 +50,7 @@ export default function Header({ settings }) {
               <i className="fas fa-lock"></i> Login
             </button>
             {settings.allow_register === 1 && (
-              <button className="bf-btn bf-btn-primary" onClick={() => setShowRegister(true)}>
+              <button className="bf-btn bf-btn-gradient" onClick={() => setShowRegister(true)}>
                 Open Account <i className="fas fa-arrow-right"></i>
               </button>
             )}
@@ -81,7 +81,7 @@ export default function Header({ settings }) {
             <i className="fas fa-lock"></i> Login
           </button>
           {settings.allow_register === 1 && (
-            <button className="bf-btn bf-btn-primary" onClick={() => { setMobileOpen(false); setShowRegister(true); }}>
+            <button className="bf-btn bf-btn-gradient" onClick={() => { setMobileOpen(false); setShowRegister(true); }}>
               Open Account <i className="fas fa-arrow-right"></i>
             </button>
           )}
@@ -95,8 +95,8 @@ export default function Header({ settings }) {
           <div className="bf-login-modal" onClick={e => e.stopPropagation()}>
             <button className="bf-modal-close" onClick={() => setShowLogin(false)}>&times;</button>
             <div className="bf-modal-icon"><i className="fas fa-lock"></i></div>
-            <h3>Welcome Back</h3>
-            <p>Login to your ButterField account</p>
+              <h3>Welcome Back</h3>
+              <p>Login to your ButterField account to manage your finances</p>
             <form action="/api/auth/login" method="POST" onSubmit={async (e) => {
               e.preventDefault();
               const form = e.target;
@@ -139,7 +139,7 @@ export default function Header({ settings }) {
             <button className="bf-modal-close" onClick={() => setShowRegister(false)}>&times;</button>
             <div className="bf-modal-icon"><i className="fas fa-user-plus"></i></div>
             <h3>Get Started</h3>
-            <p>Open your ButterField account today</p>
+              <p>Open your ButterField account and experience next-gen fintech</p>
             <form onSubmit={(e) => {
               e.preventDefault();
               window.location.href = '/register';
@@ -152,7 +152,7 @@ export default function Header({ settings }) {
                 <label>Email Address</label>
                 <input name="email" type="email" required />
               </div>
-              <button className="bf-btn bf-btn-gold" type="submit">
+              <button className="bf-btn bf-btn-primary" type="submit">
                 Continue <i className="fas fa-arrow-right"></i>
               </button>
             </form>

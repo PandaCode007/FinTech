@@ -11,9 +11,9 @@ export default function Footer({ settings }) {
             <Link to="/" className="bf-logo">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
                 <rect width="38" height="38" rx="10" fill="url(#footer-logo-grad)" />
-                <path d="M10 26V14h6v12h-6zm12 0V10h6v16h-6z" fill="white" opacity="0.2"/>
+                <path d="M10 26V14h6v12h-6zm12 0V10h6v16h-6z" fill="white" opacity="0.15"/>
                 <path d="M10 22L19 10l9 12" stroke="white" strokeWidth="2" fill="none"/>
-                <defs><linearGradient id="footer-logo-grad" x1="0" y1="0" x2="38" y2="38"><stop stopColor="#e94560"/><stop offset="1" stopColor="#ff6b81"/></linearGradient></defs>
+                <defs><linearGradient id="footer-logo-grad" x1="0" y1="0" x2="38" y2="38"><stop stopColor="#FF4EC8"/><stop offset="1" stopColor="#4E9EFF"/></linearGradient></defs>
               </svg>
               <span className="bf-logo-text">ButterField</span>
             </Link>
@@ -53,9 +53,9 @@ export default function Footer({ settings }) {
           <div>
             <h4>Contact Us</h4>
             <ul className="bf-footer-links">
-              <li><i className="fas fa-map-marker-alt" style={{marginRight: '8px', color: 'var(--bf-accent)'}}></i>{settings?.company_address || 'Grand Cayman, CAYMAN ISLANDS'}</li>
-              <li><i className="fas fa-phone" style={{marginRight: '8px', color: 'var(--bf-accent)'}}></i>{settings?.company_phone || '07915636507'}</li>
-              <li><i className="fas fa-envelope" style={{marginRight: '8px', color: 'var(--bf-accent)'}}></i>{settings?.company_email || 'customercare@butterfieldapp.com'}</li>
+              <li><i className="fas fa-map-marker-alt" style={{marginRight: '8px', color: 'var(--bf-primary)'}}></i>{settings?.company_address || 'Grand Cayman, CAYMAN ISLANDS'}</li>
+              <li><i className="fas fa-phone" style={{marginRight: '8px', color: 'var(--bf-primary)'}}></i>{settings?.company_phone || '07915636507'}</li>
+              <li><i className="fas fa-envelope" style={{marginRight: '8px', color: 'var(--bf-primary)'}}></i>{settings?.company_email || 'customercare@butterfieldapp.com'}</li>
             </ul>
           </div>
         </div>
@@ -63,9 +63,9 @@ export default function Footer({ settings }) {
         <div className="bf-footer-bottom">
           <p>&copy; {currentYear} {settings?.company_name || 'ButterField'}. All rights reserved.</p>
           <div className="bf-footer-badges">
-            <span style={{fontSize: '0.75rem', color: 'var(--bf-text-muted)'}}>FDIC Insured</span>
-            <span style={{fontSize: '0.75rem', color: 'var(--bf-text-muted)'}}>256-bit SSL</span>
-            <span style={{fontSize: '0.75rem', color: 'var(--bf-text-muted)'}}>PCI DSS Compliant</span>
+            <span>FDIC Insured</span>
+            <span>256-bit SSL</span>
+            <span>PCI DSS Compliant</span>
           </div>
         </div>
       </div>
